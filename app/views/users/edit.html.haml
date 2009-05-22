@@ -12,7 +12,9 @@
 
           %div
             = user_form.label :twitter
-            %div= user_form.text_field :twitter
+            %div
+              = user_form.text_field :twitter
+              %p.instruct.twitter_name Do not include the @ for your Twitter name
 
           - user_form.fields_for :feed do |feed_form|
             %div
