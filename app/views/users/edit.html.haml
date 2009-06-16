@@ -14,9 +14,6 @@
             = user_form.label :twitter
             %div
               = user_form.text_field :twitter
-<<<<<<< HEAD:app/views/users/edit.html.haml
-              %p.instruct.twitter_name Do not include the @ for your Twitter name
-=======
               %p.instruct Please use only your twitter username, for example: bostonrb
 
           %div
@@ -26,7 +23,6 @@
           %div
             = user_form.label :company_id, "Company"
             %div= user_form.select :company_id, companies_select_options, :include_blank => true
->>>>>>> e58eb907c560a3f498205a5ca8bb6b05a61b6819:app/views/users/edit.html.haml
 
           - user_form.fields_for :feed do |feed_form|
             %div
