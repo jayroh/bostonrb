@@ -1,22 +1,21 @@
 class Project < ActiveRecord::Base
-  has_markup :description, :cache_html => true
+  belongs_to :user
 
   named_scope :all, :order => 'name asc'
 
-  validates_presence_of :name
-  validates_url_format_of :homepage_url, :message => "is invalid"
+  validates_presence_of :name, :user_id
+  validates_url_format_of :github_url, :message => "is invalid"
 
   def to_s
     name
   end
 
   def self.featured
-    first :order => "rand()"
+    self.random
   end
 
   named_scope :all_except, lambda { |project|
     { :conditions => ['id <> ?', project],
       :order => 'name asc' }
   }
-
 end

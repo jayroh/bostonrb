@@ -20,10 +20,8 @@ jQuery(document).ready(function($) {
   $('#people .collage').cycle({ fx: 'scrollDown',
                                 timeout: 8000});
 
-  $('#user_twitter').blur(function(){
-    if(this.value.indexOf('@') == 0){ 
-      this.value = this.value.substring(1);
-    }
+  $('#user_twitter').bind('keyup', function(){
+    this.value = this.value.replace(/\W/g,'');
   });
-
+  
 });

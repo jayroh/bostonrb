@@ -15,11 +15,11 @@ class HomeControllerTest < ActionController::TestCase
       @recent_blogs = [Factory.build(:entry)]
       Entry.stubs(:recent).returns(@recent_blogs)
 
-      @featured_project = Factory.build(:project)
+      @featured_project = Factory(:project)
       Project.stubs(:featured).returns(@featured_project)
 
-      @recent_projects = [Factory.build(:project)]
-      Project.stub_chain(:ordered, :limited).returns(@recent_projects)
+      @popular_projects = [Factory(:project)]
+      Project.stub_chain(:ordered, :limited).returns(@popular_projects)
 
       @featured_job = Factory.build(:job)
       Job.stubs(:featured).returns(@featured_job)
@@ -33,20 +33,25 @@ class HomeControllerTest < ActionController::TestCase
       get :index
     end
 
-    should_respond_with :success
+    should_respond_with    :success
     should_render_template :index
 
     should "fetch users" do
       assert_received(User, :ordered) {|expect| expect.with("updated_at desc") }
     end
 
-    should "fetch 5 blog posts" do
-      assert_received(Entry, :recent) {|expect| expect.with(5) }
+    should "fetch 10 blog posts" do
+      assert_received(Entry, :recent) {|expect| expect.with(10) }
     end
 
     should "fetch 4 recurring events" do
       assert_received(Event, :next) {|expect| expect.with(4) }
       assert_received(Event, :recurring)
+    end
+
+    should "display date for recurring events" do
+      assert_select "p.date span",
+        :text => @recurring_events.first.date.to_s(:fancy_date)
     end
 
     should "fetch 5 special events" do
@@ -67,9 +72,9 @@ class HomeControllerTest < ActionController::TestCase
       assert_received(Project, :featured)
     end
 
-    should "fetch 5 recent projects" do
+    should "fetch 5 popular projects" do
       assert_received(Project, :limited) {|expect| expect.with(5) }
-      assert_received(Project, :ordered)
+      assert_received(Project, :ordered) {|expect| expect.with("watchers desc") }
     end
 
     should "fetch 5 recent companies" do
@@ -83,7 +88,7 @@ class HomeControllerTest < ActionController::TestCase
     should_assign_to(:recent_blogs) { @recent_blogs }
     should_assign_to(:featured_project) { @featured_project }
     should_assign_to(:recent_jobs)      { @recent_jobs }
-    should_assign_to(:recent_projects)  { @recent_projects }
+    should_assign_to(:popular_projects) { @popular_projects }
     should_assign_to(:recent_companies) { @recent_companies }
   end
 

@@ -6,6 +6,8 @@
       %h2 Recurring Events
       - @recurring_events.each do |event|
         .quarter>
+          %p.date
+            %span= event.date.to_s(:fancy_date)
           %h3= link_to h(event.title), event
           %p= event.cached_description_html
 
@@ -37,16 +39,14 @@
 
 #projects
   .row
-    .crud
-      %p= link_to 'New project', new_project_path
     %h2 Open Source Projects
     - if @featured_project
       .half>
-        %h3= link_to @featured_project.name, @featured_project.homepage_url
-        %p= truncate(@featured_project.cached_description_html, :length => 250)
+        %h3= link_to @featured_project.name, project_path(@featured_project)
+        %p= truncate(@featured_project.description, :length => 250)
     .half>
       %ul
-        - link_to_each(@recent_projects).each do |link|
+        - link_to_each(@popular_projects).each do |link|
           %li= link
 
 #apps.row
