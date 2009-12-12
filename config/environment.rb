@@ -24,23 +24,16 @@ Rails::Initializer.run do |config|
     :version => '> 3.0.4'
   config.gem 'builder',
     :version => '2.1.2'
-  config.gem 'dancroak-validates_email_format_of',
-    :source  => 'http://gems.github.com',
-    :lib     => 'validates_email_format_of'
   config.gem 'dancroak-twitter-search',
     :version => "0.5.5",
     :source  => 'http://gems.github.com',
     :lib     => 'twitter_search'
-  config.gem 'feed-normalizer',
-    :version => '1.4.0'
   config.gem 'gravtastic',
     :version => '>= 2.1.0'
   config.gem 'haml',
     :version => '2.1.0'
   config.gem "json",
-    :version => '1.1.6'
-  config.gem 'simple-rss',
-    :version => '1.1'
+    :version => '>=1.1.7'
   config.gem 'technicalpickles-has_markup',
     :lib     => 'has_markup',
     :source  => 'http://gems.github.com',
@@ -57,19 +50,23 @@ Rails::Initializer.run do |config|
     :lib     => "utility_scopes",
     :source  => 'http://gems.github.com', 
     :version => '0.2.2'
-  config.gem "giraffesoft-resource_controller",
-    :lib     => "resource_controller",
-    :version => "0.6.1"
-  config.gem "feedra"
+  config.gem "josevalim-inherited_resources",
+    :lib     => "inherited_resources",
+    :version => "0.8.5"
   config.gem "dancroak-le-git",
     :lib     => "le_git",
     :version => "0.0.5"
-  config.gem "happymapper"
-  config.gem "rest-client",
-    :lib     => 'rest_client'
+  config.gem 'taf2-curb', :lib => 'curb', :version => '0.2.8.0' # feezirra would normally depend on this, but doesn't depend a working it works with
   config.gem "technicalpickles-feedra",
     :lib     => "feedra",
-    :version => "0.0.2"
+    :version => "0.1.1"
+  config.gem "will_paginate",
+    :version => "2.3.11"
+
+  config.gem 'chronic'
+
+  config.gem 'truncate_html',
+    :source => 'http://gemcutter.org'
 end
 
 DO_NOT_REPLY = "dcroak+bostonrb@thoughtbot.com"

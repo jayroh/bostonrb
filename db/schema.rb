@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090603002159) do
+ActiveRecord::Schema.define(:version => 20090730184621) do
 
   create_table "apps", :force => true do |t|
     t.string   "name"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20090603002159) do
     t.string   "other_speakers",          :default => ""
     t.string   "location"
     t.text     "cached_description_html"
+    t.datetime "date_of"
   end
 
   add_index "presentations", ["user_id"], :name => "index_presentations_on_user_id"
@@ -122,7 +123,7 @@ ActiveRecord::Schema.define(:version => 20090603002159) do
 
   create_table "tweets", :force => true do |t|
     t.string   "text"
-    t.integer  "twitter_id"
+    t.integer  "twitter_id", :limit => 8
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

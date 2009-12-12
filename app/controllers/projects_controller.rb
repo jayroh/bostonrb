@@ -1,12 +1,10 @@
-class ProjectsController < ApplicationController
-
-  def index
-    @projects = Project.all
-    @left_projects, @right_projects = @projects.halve
-  end
-
-  def show
-    @project = Project.find params[:id]
+class ProjectsController < InheritedResources::Base
+  actions :show, :index
+  
+  protected
+  
+  def collection
+    @projects ||= end_of_association_chain.by_name(:asc).paginate(:page => params[:page])
   end
 
 end
